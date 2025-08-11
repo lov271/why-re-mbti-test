@@ -24,12 +24,14 @@ const questions = [
     { q: '신규 서비스를 개발할 때,<br>보안팀의 이상적인 역할은?', a: [{ text: '개발 완료 후, 출시 전에<br>취약점 진단과 모의 해킹으로<br>기술적 완성도를 높인다.', type: 'T' }, { text: '개발 초기 기획 단계부터 참여하여,<br>설계상 보안 위협이 없도록<br>프로세스를 개선한다.', type: 'P' }] }
 ];
 
+// --- 수정된 결과 데이터 ---
 const results = {
-    ST: { type: "보안 설계자", sub: "The Architect", mascot: "bee.jpg", tags: ["#소통중심", "#어드바이저", "#유연함", "#리스크관리"], desc: "보안은 잘 짜인 시스템과 자동화된 기술로 완성된다고 믿습니다. 명확한 정책을 수립하고, 강력한 기술적 통제로 사람이 개입할 여지를 최소화하여 잠재적 위협을 원천 차단하는 것을 가장 중요하게 생각합니다.", best_code: "SP", worst_code: "AP" },
-    SP: { type: "규정 수호자", sub: "The Guardian", mascot: "guardian.jpg", tags: ["#소통중심", "#어드바이저", "#유연함", "#리스크관리"], desc: "잘 만든 정책과 규정, 그리고 그것을 따르는 사람들의 노력이 합쳐질 때 가장 안전하다고 믿습니다. 기술은 보조적인 수단이며, 결국 보안은 사람이 만들어나가는 문화이자 프로세스라고 생각합니다. 당신의 꼼꼼함이 모두를 구원합니다.", best_code: "ST", worst_code: "AT" },
-    AT: { type: "기술 해결사", sub: "The Specialist", mascot: "specialist.jpg", tags: ["#소통중심", "#어드바이저", "#유연함", "#리스크관리"], desc: "규정이나 정책보다 현장에서의 기술적인 판단과 대응 능력이 더 중요하다고 믿습니다. 어떤 위협이든 깊이 있는 기술 전문성으로 분석하고 해결할 수 있다는 자신감을 가지고 있으며, 실제 상황에서의 빠른 조치를 선호합니다.", best_code: "AP", worst_code: "SP" },
-    AP: { type: "보안 어드바이저", sub: "The Advisor", mascot: "advisor.jpg", tags: ["#소통중심", "#어드바이저", "#유연함", "#리스크관리"], desc: "보안은 무조건 막는 것이 아니라, 비즈니스와 사람을 이해하며 위험을 '관리'하는 과정이라고 생각합니다. 동료들과의 소통을 통해 현실적인 대안을 찾고, 모두가 만족할 수 있는 접점을 만들어내는 역할에 가장 큰 가치를 둡니다.", best_code: "AT", worst_code: "ST" }
+    ST: { name: "보안 설계자", sub: "The Architect", theme: "architect", mascot: "bee.jpg", summary: "시스템과 기술로 제어하는", tags: ["#정책우선", "#자동화", "#중앙통제", "#기술신뢰", "#데이터는_거짓말_안해"], desc: "보안은 잘 짜인 시스템과 자동화된 기술로 완성된다고 믿습니다. 명확한 정책을 수립하고, 강력한 기술적 통제로 사람이 개입할 여지를 최소화하여 잠재적 위협을 원천 차단하는 것을 가장 중요하게 생각합니다.", solution: "Web Keeper", best_code: "SP", worst_code: "AP" },
+    SP: { name: "규정 수호자", sub: "The Guardian", theme: "guardian", mascot: "guardian.jpg", summary: "시스템과 사람으로 완성하는", tags: ["#규정수호", "#프로세스", "#가이드라인", "#협업", "#사람이_우선"], desc: "잘 만든 정책과 규정, 그리고 그것을 따르는 사람들의 노력이 합쳐질 때 가장 안전하다고 믿습니다. 기술은 보조적인 수단이며, 결국 보안은 사람이 만들어나가는 문화이자 프로세스라고 생각합니다. 당신의 꼼꼼함이 모두를 구원합니다.", solution: "Privacy-i", best_code: "ST", worst_code: "AT" },
+    AT: { name: "기술 해결사", sub: "The Specialist", theme: "specialist", mascot: "specialist.jpg", summary: "전문가의 기술로 해결하는", tags: ["#기술전문가", "#핸즈온", "#위기대응", "#실용주의", "#답답한건_못참아"], desc: "규정이나 정책보다 현장에서의 기술적인 판단과 대응 능력이 더 중요하다고 믿습니다. 어떤 위협이든 깊이 있는 기술 전문성으로 분석하고 해결할 수 있다는 자신감을 가지고 있으며, 실제 상황에서의 빠른 조치를 선호합니다.", solution: "Privacy-i EDR", best_code: "AP", worst_code: "SP" },
+    AP: { name: "보안 어드바이저", sub: "The Advisor", theme: "advisor", mascot: "advisor.jpg", summary: "전문가의 소통으로 해결하는", tags: ["#소통중심", "#어드바이저", "#유연함", "#리스크관리", "#좋은게_좋은거지"], desc: "보안은 무조건 막는 것이 아니라, 비즈니스와 사람을 이해하며 위험을 '관리'하는 과정이라고 생각합니다. 동료들과의 소통을 통해 현실적인 대안을 찾고, 모두가 만족할 수 있는 접점을 만들어내는 역할에 가장 큰 가치를 둡니다.", solution: "Server-i", best_code: "AT", worst_code: "ST" }
 };
+// -----------------------
 
 let currentQuestionIndex = 0;
 let userAnswers = new Array(questions.length).fill(null);
@@ -68,7 +70,7 @@ function selectAnswer(answerIndex) {
 
     if (currentQuestionIndex === questions.length) {
         progressBar.style.width = '100%';
-        setTimeout(() => showResult(), 500);
+        setTimeout(() => showResult(), 300);
     } else {
         showQuestion();
     }
@@ -83,7 +85,8 @@ function goBack() {
 function showResult(resultTypeFromUrl = null) {
     cardWrapper.classList.add('hide');
     resultContainer.classList.remove('hide');
-
+    document.body.className = '';
+    
     let finalType;
     if (resultTypeFromUrl) {
         finalType = resultTypeFromUrl;
@@ -101,45 +104,65 @@ function showResult(resultTypeFromUrl = null) {
     const bestMatch = results[result.best_code];
     const worstMatch = results[result.worst_code];
 
+    document.body.classList.add(result.theme);
+
     resultPage.innerHTML = `
         <div class="result-card">
-            <h3 id="result-summary">${result.summary}</h3>
-            <h1 id="result-type">${result.type}</h1>
-            <div class="result-emoji">
-                <img src="./${result.mascot}" alt="${result.type}">
+            <div class="result-card-header">
+                <span>${result.summary}</span>
+                <h1 style="color:${getThemeColor(result.theme)}">${result.name}<span><br>${result.sub}</span></h1>
             </div>
-            <div id="result-tags" class="tags-box">
+            <img src="./${result.mascot}" alt="${result.name}" class="result-mascot">
+            <p class="result-desc">${result.desc}</p>
+            <div class="tags-box">
                 ${result.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
             </div>
-            <div class="desc-box">
-                <p id="result-desc">${result.desc}</p>
+            <div class="recommend-box">
+                <span>추천 솔루션:</span>
+                <strong>${result.solution}</strong>
+            </div>
+            <div class="qr-box">
+                <img src="./qr-code.png" alt="소만사 홈페이지 QR">
+                <p>소만사 홈페이지</p>
             </div>
         </div>
-        <div class="match-box">
-            <div class="match-item">
-                <h4>환상의 케미</h4>
-                <div class="match-emoji">
-                    <img src="./${bestMatch.mascot}" alt="${bestMatch.type}">
+        <div class="match-wrapper">
+            <div class="match-box">
+                <div class="match-item">
+                    <h4>환상의 케미</h4>
+                    <img src="./${bestMatch.mascot}" alt="${bestMatch.name}" class="match-mascot">
+                    <span class="match-title">${bestMatch.name}</span>
                 </div>
-                <div class="match-text">
-                    <span id="best-match">${bestMatch.type}</span>
-                </div>
-            </div>
-            <div class="match-item">
-                <h4>환장의 케미</h4>
-                <div class="match-emoji">
-                    <img src="./${worstMatch.mascot}" alt="${worstMatch.type}">
-                </div>
-                <div class="match-text">
-                    <span id="worst-match">${worstMatch.type}</span>
+                <div class="match-item">
+                    <h4>환장의 케미</h4>
+                    <img src="./${worstMatch.mascot}" alt="${worstMatch.name}" class="match-mascot">
+                    <span class="match-title">${worstMatch.name}</span>
                 </div>
             </div>
-        </div>
-        <div class="result-footer">
-            <button onclick="shareResult()" class="share-btn">내 검사결과 공유하기</button>
-            <button onclick="restartTest()" class="restart-btn">테스트 다시하기</button>
+            <div class="result-footer">
+                <button onclick="shareResult()" class="share-btn">내 검사결과 공유하기</button>
+                <button onclick="restartTest()" class="action-btn restart-btn">테스트 다시하기</button>
+            </div>
         </div>
     `;
+}
+
+function calculateResult() {
+    let score = { S: 0, A: 0, T: 0, P: 0 };
+    userAnswers.forEach(answer => { if (answer) score[answer]++; });
+    const firstChar = score.S >= score.A ? 'S' : 'A';
+    const secondChar = score.T >= score.P ? 'T' : 'P';
+    return firstChar + secondChar;
+}
+
+function getThemeColor(theme) {
+    switch(theme) {
+        case 'guardian': return '#D96A6A';
+        case 'architect': return '#D4AF37';
+        case 'specialist': return '#60A97A';
+        case 'advisor': return '#709ABE';
+        default: return '#3D3D3D';
+    }
 }
 
 function logDataToSheet(resultType) {
@@ -167,7 +190,7 @@ function shareResult() {
     
     if (navigator.clipboard) {
         navigator.clipboard.writeText(shareUrl).then(() => {
-            alert("결과 링크가 복사되었습니다! 공유해보세요.");
+            alert("링크가 복사되었습니다! 결과를 공유해보세요.");
         }).catch(() => {
             alert("링크 복사에 실패했습니다.");
         });
